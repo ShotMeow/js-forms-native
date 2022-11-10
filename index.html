@@ -10,29 +10,33 @@
 </head>
 <body>
     <div class="container">
-        <form novalidate>
+        <form action="https://httpbin.org/post" method="POST" novalidate>
             <div>
                 <label>
                     Компания
                     <input type="text" name="company-name" />
+                    <span class="error" data-error-name="company-name"></span>
                 </label>
             </div>
             <div>
                 <label>
                     Название статьи
                     <input type="text" name="title" />
+                    <span class="error" data-error-name="title"></span>
                 </label>
             </div>
             <div>
                 <label>
                     Подводка
                     <textarea name="description"></textarea>
+                    <span class="error" data-error-name="description"></span>
                 </label>
             </div>
             <div>
                 <label>
                     Текст
                     <textarea name="text"></textarea>
+                    <span class="error" data-error-name="text"></span>
                 </label>
             </div>
             <div>
@@ -40,10 +44,11 @@
                 <label>
                     Изображение
                     <input type="file" name="image" />
+                    <span class="error" data-error-name="image"></span>
                 </label>
             </div>
             <div>
-                <button type="button">Отправить</button>
+                <button type="submit">Отправить</button>
             </div>
         </form>
     </div>

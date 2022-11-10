@@ -21,7 +21,7 @@ const getImage = (file) => {
 
 const getErrors = async (data) => {
     const errors = {
-        companyName: '',
+        'company-name': '',
         title: '',
         description: '',
         text: '',
@@ -77,14 +77,39 @@ const getErrors = async (data) => {
             }
         }
     }
+
+    return errors;
 }
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
+    // Собрать данные
     const formData = new FormData(form);
 
+    // Проверить данные
     const errors = await getErrors(formData);
+    const errorsEntries = Object.entries(errors);
+
+    // Подсветить ошибки
+    errorsEntries.forEach(([key, value]) => {
+        const span = form.querySelector(`[data-error-name="${key}"]`);
+        span.textContent = value;
+    })
+
+    // Сфокусироваться на первом ошибочном поле
+    const errorInput = errorsEntries.find(([, value]) => value.length);
+
+    if (errorInput) {
+        form.querySelector(`[name="${errorInput[0]}"]`).focus();
+        return;
+    }
+
+    // Если ошибок нет, отправляем данные
+    fetch(form.action, {
+        method: form.method,
+        body: formData
+    });
 })
 
 fileInput.addEventListener('change', (event) => {

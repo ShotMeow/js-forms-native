@@ -41,3 +41,7 @@ form > div > button {
     height: 200px;
     object-fit: cover;
 }
+
+.error {
+    color: #ff0000;
+}
